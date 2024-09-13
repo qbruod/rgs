@@ -5,7 +5,7 @@ int main()
 {
 	std::cout << "Hello RGS!" << std::endl;
 
-	RGS::Application app("RGS",800,600);
+	RGS::Application app("RGS",400,300);
 
 	app.Run();
 }

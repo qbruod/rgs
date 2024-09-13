@@ -1,4 +1,4 @@
 #pragma once
 #define LOG(...)
-#define ASSERT(x, ...) { if(!(x)) { LOG(__VA_ARGS__); __debugbreak(); } }
+#define ASSERT(x, ...)
 //__VA_ARGS__是可变参数

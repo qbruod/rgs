@@ -12,7 +12,7 @@ namespace RGS {
 		//分配一个大小为m_PixelSize的动态数组（因为程序运行前m_PixelSize
 		//大小并不可知）。每个元素都是一个Vec3对象（RGB）
 		m_DepthBuffer = new float[m_PixelSize]();
-		Clear({ 0.8f,0.8f,0.8f });
+		Clear({ 0.0f,0.0f,0.0f });
 		ClearDepth(1.0f);
 	}
 

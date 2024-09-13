@@ -6,8 +6,11 @@ namespace RGS {
 	//初始模型空间顶点坐标数据
 	struct VertexBase
 	{
-		Vec4 ModelPos = { 0, 0, 0, 1 };
-
+		Vec4 ModelPos = { 0.0f,0.0f,0.0f,1.0f };
+		operator const std::string() const
+		{
+			return "ModelPos: " + (std::string)ModelPos;
+		}
 	};
 
 	//数据输入到Vertex Shader后得到的裁剪空间位置数据
