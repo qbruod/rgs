@@ -5,7 +5,14 @@
 
 namespace RGS {
 
-    constexpr int RGS_MAX_VARYINGS = 9;
+    Vec2 operator+ (const Vec2& left, const Vec2& right)
+    {
+        return Vec2{ left.X + right.X, left.Y + right.Y };
+    }
+    Vec2 operator- (const Vec2& left, const Vec2& right)
+    {
+        return Vec2{ left.X - right.X, left.Y - right.Y };
+    }
 
     Vec3 operator+ (const Vec3& left, const Vec3& right)
     {
@@ -22,6 +29,10 @@ namespace RGS {
     Vec3 operator* (const Vec3& left, const float right)
     {
         return right * left;
+    }
+    Vec3 operator* (const Vec3& left, const Vec3& right)
+    {
+        return { left.X * right.X, left.Y * right.Y , left.Z * right.Z };
     }
     Vec3 operator/ (const Vec3& left, const float right)
     {
@@ -212,6 +223,8 @@ namespace RGS {
      * see http://www.songho.ca/opengl/gl_projectionmatrix.html
      * 中文教程 https://blog.csdn.net/ad88282284/article/details/78245719
      */
+    //裁剪空间 / 齐次空间（Clip Space / Homogeneous Space）
+    //顶点经过投影矩阵（透视投影）变换，进入裁剪空间
     Mat4 Mat4Perspective(float fovy, float aspect, float near, float far)
     {
         float z_range = far - near;
@@ -232,6 +245,16 @@ namespace RGS {
         return end * t + start * (1.0f - t);
     }
 
+    Vec3 Lerp(const Vec3& start, const Vec3& end, const float t)
+    {
+        return end * t + start * (1.0f - t);
+    }
+
+    Vec4 Lerp(const Vec4& start, const Vec4& end, const float t)
+    {
+        return end * t + start * (1.0f - t);
+    }
+
     unsigned char Float2UChar(const float f)
     {
         return (unsigned char)(f * 255.0f);
@@ -239,5 +262,22 @@ namespace RGS {
     float UChar2Float(const unsigned char c)
     {
         return (float)c / 255.0f;
+    }
+
+    //夹断方法
+    float Clamp(const float val, const float min, const float max)
+    {
+        if (val < min)
+        {
+            return min;
+        }
+        else if (val > max)
+        {
+            return max;
+        }
+        else
+        {
+            return val;
+        }
     }
 }

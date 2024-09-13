@@ -129,7 +129,7 @@ namespace RGS {
         ASSERT(newBitmap != nullptr);
         constexpr int channelCount = 3;
         int size = m_Width * m_Height * channelCount * sizeof(unsigned char);
-        memset(m_Buffer, 0, size);  //把窗口画成黑色
+        memset(m_Buffer, 255, size);  //把窗口画成黑色
         oldBitmap = (HBITMAP)SelectObject(m_MemoryDC, newBitmap);
 
         DeleteObject(oldBitmap);    //删除旧位图

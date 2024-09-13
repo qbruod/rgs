@@ -25,8 +25,8 @@ namespace RGS {
         int GetPixelIndex(const int x, const int y) const { return y * m_Width + x; }
         //通过计算 y * m_Width + x 来确定像素在一维数组中的索引值(二维数组->一维数组位置）
     private:
-        int m_Width = 800;
-        int m_Height = 600;
+        int m_Width = 1600;
+        int m_Height = 1200;
         int m_PixelSize;
         float* m_DepthBuffer;
         Vec3* m_ColorBuffer;
