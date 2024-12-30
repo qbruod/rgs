@@ -14,6 +14,7 @@ namespace RGS {
             :X(0.0f),Y(0.0f){}
         constexpr Vec2(float x,float y)
             :X(x),Y(y){}
+
     };
 
     struct Vec3
@@ -35,6 +36,8 @@ namespace RGS {
 
         constexpr Vec4()
             : X(0.0f), Y(0.0f), Z(0.0f), W(0.0f) {};
+        constexpr Vec4(float val)
+            : X(val), Y(val), Z(val), W(val) {}
         constexpr Vec4(float x, float y, float z, float w)
             : X(x), Y(y), Z(z), W(w) {};
         constexpr Vec4(const Vec3& vec3, float w)
@@ -43,20 +46,7 @@ namespace RGS {
         operator Vec2() const { return { X,Y }; }//同return Vec2(X, Y)
         operator Vec3() const { return { X,Y,Z }; }
 
-        operator std::string() const
-        {
-            std::string res;
-            res += "(";
-            res += std::to_string(X);
-            res += ",";
-            res += std::to_string(Y);
-            res += ",";
-            res += std::to_string(Z);
-            res += ",";
-            res += std::to_string(W);
-            res += ")";
-            return res;
-        }
+
     };
 
     //按行优先存储，第一列向量为[0][0],[1][0],[2][0],[3][0]《-》0,4,8,12
@@ -96,9 +86,13 @@ namespace RGS {
         
     };
 
+
     float Dot(const Vec3& left, const Vec3& right);//矩阵点乘
     Vec3 Cross(const Vec3& left, const Vec3& right);//叉乘
     Vec3 Normalize(const Vec3& v);//归一化
+
+    Vec2 operator+ (const Vec2& left, const Vec2& right);
+    Vec2 operator- (const Vec2& left, const Vec2& right);
 
     Vec3 operator+ (const Vec3& left, const Vec3& right);
     Vec3 operator- (const Vec3& left, const Vec3& right);
@@ -139,5 +133,7 @@ namespace RGS {
     float UChar2Float(const unsigned char c);
 
     float Lerp(const float start, const float end, const float t);
-
+    Vec3 Lerp(const Vec3& start, const Vec3& end, const float t);
+    Vec4 Lerp(const Vec4& start, const Vec4& end, const float t);
+    float Clamp(const float val, const float min, const float max);
 }

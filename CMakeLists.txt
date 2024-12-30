@@ -17,7 +17,7 @@ set(HEADERS
 	"src/RGS/Maths.h"
 	"src/RGS/Shaders/ShaderBase.h" 
 	"src/RGS/Shaders/BlinnShader.h"
-	"src/RGS/Renderer.h")
+	"src/RGS/Renderer.h" "src/RGS/Texture.h")
 
 set(SOURCES
    "src/RGS/Main.cpp"
@@ -25,7 +25,7 @@ set(SOURCES
    "src/RGS/Window.cpp" 
    "src/RGS/WindowsWindow.cpp"
    "src/RGS/Framebuffer.cpp" 
-   "src/RGS/Maths.cpp" "src/RGS/Shaders/BlinnShader.cpp" "src/RGS/Renderer.cpp")
+   "src/RGS/Maths.cpp" "src/RGS/Shaders/BlinnShader.cpp" "src/RGS/Renderer.cpp" "src/RGS/stb/stb_image.cpp" "src/RGS/Texture.cpp")
 
 set(
 	INCLUDE_PATH
@@ -37,3 +37,20 @@ set(TARGET RGS)
 add_executable(${TARGET} ${HEADERS} ${SOURCES})
 target_include_directories(${TARGET} PRIVATE ${INCLUDE_PATH})
 #告诉程序从src这个文件开始找下面的文件
+
+set(ASSETS_SRC "${CMAKE_SOURCE_DIR}/assets")
+set(ASSETS_DST "$<TARGET_FILE_DIR:${TARGET}>/assets")
+
+set(ASSETS_CMD copy_directory)
+set(ASSETS_MSG "Copy Assets")
+
+add_custom_command(
+    TARGET ${TARGET} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E echo
+    "${ASSETS_MSG}: ${ASSETS_SRC} to ${ASSETS_DST}")
+
+add_custom_command(
+	#操作在build后执行
+    TARGET ${TARGET} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E ${ASSETS_CMD}
+    "${ASSETS_SRC}" "${ASSETS_DST}")
